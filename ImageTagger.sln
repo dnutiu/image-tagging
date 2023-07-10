@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTagger.Core", "ImageTagger.Core\ImageTagger.Core.csproj", "{BE63F2C9-EE5F-4778-81B6-C08E5F3A6338}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTagger.ConsoleTest", "ImageTagger.ConsoleTest\ImageTagger.ConsoleTest.csproj", "{D75E5EBF-C1AC-438B-96C9-115833D46CE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTagger.Examples", "ImageTagger.Examples\ImageTagger.Examples.csproj", "{D75E5EBF-C1AC-438B-96C9-115833D46CE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

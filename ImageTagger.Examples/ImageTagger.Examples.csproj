@@ -5,10 +5,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>ImageTagger.ConsoleTest</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ImageTagger.Core\ImageTagger.Core.csproj"/>
+        <ProjectReference Include="..\ImageTagger.Core\ImageTagger.Core.csproj" />
     </ItemGroup>
 
 </Project>
