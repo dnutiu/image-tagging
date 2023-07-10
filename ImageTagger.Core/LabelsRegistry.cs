@@ -5,26 +5,34 @@
 /// </summary>
 public class LabelsRegistry
 {
-    private readonly List<string> labels;
+    private readonly List<string> _labels;
 
     /// <summary>
-    /// Instantiates a new instance of LabelsRegistry.
+    ///     Instantiates a new instance of LabelsRegistry.
     /// </summary>
     /// <param name="labelsFile">The labelsFile path.</param>
     public LabelsRegistry(string labelsFile)
     {
-        labels = new List<string>();
+        _labels = new List<string>();
         // Read the labels file and add the labels to the list.
         using var sr = new StreamReader(labelsFile);
         while (!sr.EndOfStream)
         {
-            labels.Add(sr.ReadLine());
+            var line = sr.ReadLine() ?? string.Empty;
+            if (line != string.Empty)
+            {
+                _labels.Add(line);
+            }
         }
     }
 
+    /// <summary>
+    /// Returns the label at the given index.
+    /// </summary>
+    /// <param name="i">The zero based index</param>
     public string this[int i]
     {
-        get => labels[i];
-        private set => labels[i] = value;
+        get => _labels[i];
+        private set => _labels[i] = value;
     }
 }
