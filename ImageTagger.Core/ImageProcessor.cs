@@ -3,7 +3,7 @@
 namespace ImageTagger.Core;
 
 /// <summary>
-/// ImageProcessor is a class for processing images.
+///     ImageProcessor is a class for processing images.
 /// </summary>
 public class ImageProcessor
 {
@@ -28,7 +28,7 @@ public class ImageProcessor
                 Mode = ResizeMode.Pad
             });
         });
-        
+
         image.ProcessPixelRows(accessor =>
         {
             for (var y = 0; y < accessor.Height; y++)
