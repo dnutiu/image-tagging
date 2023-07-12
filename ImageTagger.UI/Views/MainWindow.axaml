@@ -8,7 +8,9 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Height="640"
+        MinHeight="640"
         Width="640"
+        MinWidth="640"
         Title="Image Tagger">
 
     <Design.DataContext>
@@ -25,7 +27,7 @@
                 <Image Height="224" Source="{Binding Image}" />
                 <StackPanel Orientation="Vertical" Margin="10, 10">
                     <TextBlock Text="Predicted Tags" />
-                    <TextBox TextWrapping="Wrap" MaxWidth="416" MinWidth="416" Text="{Binding ImageTags}" />
+                    <TextBox TextWrapping="Wrap" MaxWidth="416" MinWidth="416" IsReadOnly="True" Text="{Binding ImageTags}" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
