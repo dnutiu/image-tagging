@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTagger.Core", "ImageTa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTagger.Examples", "ImageTagger.Examples\ImageTagger.Examples.csproj", "{D75E5EBF-C1AC-438B-96C9-115833D46CE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTagger.UI", "ImageTagger.UI\ImageTagger.UI.csproj", "{2F571731-49D1-4E3B-848D-60F5BA5EEB89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D75E5EBF-C1AC-438B-96C9-115833D46CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D75E5EBF-C1AC-438B-96C9-115833D46CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D75E5EBF-C1AC-438B-96C9-115833D46CE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F571731-49D1-4E3B-848D-60F5BA5EEB89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F571731-49D1-4E3B-848D-60F5BA5EEB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F571731-49D1-4E3B-848D-60F5BA5EEB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F571731-49D1-4E3B-848D-60F5BA5EEB89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
