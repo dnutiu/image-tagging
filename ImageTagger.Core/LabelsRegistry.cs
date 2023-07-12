@@ -27,7 +27,7 @@ public class LabelsRegistry
     }
 
     /// <summary>
-    /// Returns the label at the given index.
+    ///     Returns the label at the given index.
     /// </summary>
     /// <param name="i">The zero based index</param>
     public string this[int i]

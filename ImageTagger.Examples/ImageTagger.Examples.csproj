@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ImageTagger.Core\ImageTagger.Core.csproj" />
+        <ProjectReference Include="..\ImageTagger.Core\ImageTagger.Core.csproj"/>
     </ItemGroup>
 
 </Project>
