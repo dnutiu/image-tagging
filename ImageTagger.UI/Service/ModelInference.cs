@@ -15,6 +15,7 @@ public class ModelInference
         // Get assembly base path
         var assemblyBasePath = Assembly.GetExecutingAssembly().Location;
         var assemblyPath = Path.GetDirectoryName(assemblyBasePath);
+        // Create model prediction instance
         _modelPrediction = new ModelPrediction(
             Path.Join(assemblyPath, TaggingModelPath),
             Path.Join(assemblyPath, TaggingModelCategoriesPath));
