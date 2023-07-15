@@ -10,11 +10,17 @@ using ImageTagger.UI.ViewModels;
 
 namespace ImageTagger.UI.Views;
 
+/// <summary>
+///     The MainWindow class is the main window of the application.
+/// </summary>
 public partial class MainWindow : Window
 {
     private readonly StackPanel? _imagePredictionStackPanel;
     private readonly ModelInference _modelInference;
 
+    /// <summary>
+    ///     Constructs a new instance of MainWindow.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
@@ -23,6 +29,12 @@ public partial class MainWindow : Window
         _modelInference = new ModelInference();
     }
 
+    /// <summary>
+    ///     OnLoadImages_Click is the event handler for the Load Images button.
+    ///     It opens a file dialog and loads the selected images.
+    ///     Then it calls the model inference service to predict the image tags.
+    ///     Finally it adds the image and the predicted tags to the UI's stack panel.
+    /// </summary>
     public async Task OnLoadImages_Click()
     {
         // Create an instance of OpenFileDialog
@@ -55,7 +67,9 @@ public partial class MainWindow : Window
                 {
                     // Add image to stack panel
                     var imageTags = _modelInference.PredictTags(file, ",");
-                    _imagePredictionStackPanel?.Children.Add(new ImagePredictionRow(imageTags, new Bitmap(file)));
+                    _imagePredictionStackPanel?.Children.Add(
+                        new ImagePredictionRow(imageTags, new Bitmap(file))
+                    );
                 });
             }
         }

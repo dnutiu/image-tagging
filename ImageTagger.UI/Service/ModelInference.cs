@@ -5,12 +5,18 @@ using ImageTagger.Core;
 
 namespace ImageTagger.UI.Service;
 
+/// <summary>
+///     ModelInference class is used to predict tags for given images.
+/// </summary>
 public class ModelInference
 {
     private const string TaggingModelCategoriesPath = "AIModels/resnet50_categories.txt";
     private const string TaggingModelPath = "AIModels/resnet50_10_epochs.onnx";
     private readonly ModelPrediction _modelPrediction;
 
+    /// <summary>
+    ///     Constructs a new instance of ModelInference.
+    /// </summary>
     public ModelInference()
     {
         // Get assembly base path
@@ -22,6 +28,12 @@ public class ModelInference
             Path.Join(assemblyPath, TaggingModelCategoriesPath));
     }
 
+    /// <summary>
+    ///     Returns the predicted tags for the given image.
+    /// </summary>
+    /// <param name="imagePath">The absolute path to the image for predicting the tags.</param>
+    /// <param name="separator">The separator for the predicted tags</param>
+    /// <returns>The string with the predicted tags.</returns>
     public string PredictTags(string imagePath, string separator)
     {
         var tags = _modelPrediction.PredictTags(imagePath);

@@ -5,6 +5,9 @@ using ImageTagger.UI.Views;
 
 namespace ImageTagger.UI;
 
+/// <summary>
+///     App is the entry point of the application.
+/// </summary>
 public class App : Application
 {
     public override void Initialize()
