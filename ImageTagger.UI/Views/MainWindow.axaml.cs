@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
@@ -26,6 +27,7 @@ public partial class MainWindow : Window
         {
             // Set the dialog's properties as needed
             Title = "Open Files",
+            AllowMultiple = true,
             Filters = new List<FileDialogFilter>
             {
                 new() { Name = "Image Files", Extensions = { "png", "jpg", "jpeg", "webp" } }
@@ -39,7 +41,12 @@ public partial class MainWindow : Window
         if (result is { Length: > 0 })
         {
             // Access the selected file(s)
-            foreach (var file in result)
+            foreach (var file in result.Where(file =>
+                         file.EndsWith(".png") || 
+                         file.EndsWith(".jpg") || 
+                         file.EndsWith(".jpeg") ||
+                         file.EndsWith(".webp")
+                         ))
             {
                 Dispatcher.UIThread.Post(() =>
                 {

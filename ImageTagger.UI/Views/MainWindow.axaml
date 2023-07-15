@@ -3,7 +3,6 @@
         xmlns:vm="using:ImageTagger.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:ImageTagger.UI.Controls"
         mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="640"
         x:Class="ImageTagger.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -25,11 +24,7 @@
             MaxHeight="580"
             HorizontalAlignment="Left"
             Margin="12,0,0,0">
-            <StackPanel Name="MainStackPanel">
-                <controls:ImagePredictionRow
-                    Image="{Binding Image}"
-                    PredictedImageTags="{Binding ImageTags}" />
-            </StackPanel>
+            <StackPanel Name="MainStackPanel" />
         </ScrollViewer>
         <Separator />
         <Button
