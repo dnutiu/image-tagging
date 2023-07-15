@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="ImageTagger.UI/App.axaml" value="ImageTagger.UI/ImageTagger.UI.csproj" />
+        <entry key="ImageTagger.UI/Controls/ImagePredictionRow.axaml" value="ImageTagger.UI/ImageTagger.UI.csproj" />
         <entry key="ImageTagger.UI/Views/MainWindow.axaml" value="ImageTagger.UI/ImageTagger.UI.csproj" />
       </map>
     </option>

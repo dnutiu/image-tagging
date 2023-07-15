@@ -3,6 +3,7 @@
         xmlns:vm="using:ImageTagger.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:ImageTagger.UI.Controls"
         mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="640"
         x:Class="ImageTagger.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -22,14 +23,9 @@
     <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled"
                   HorizontalAlignment="Left" Margin="12,0,0,0">
         <StackPanel Name="StackPanel">
-            <!-- TODO: Make this a root component -->
-            <StackPanel Orientation="Horizontal" Margin="0, 5">
-                <Image Height="224" Source="{Binding Image}" />
-                <StackPanel Orientation="Vertical" Margin="10, 10">
-                    <TextBlock Text="Predicted Tags" />
-                    <TextBox TextWrapping="Wrap" MaxWidth="416" MinWidth="416" IsReadOnly="True" Text="{Binding ImageTags}" />
-                </StackPanel>
-            </StackPanel>
+            <controls:ImagePredictionRow 
+                Image="{Binding Image}" 
+                PredictedImageTags="{Binding ImageTags}" />
         </StackPanel>
     </ScrollViewer>
 

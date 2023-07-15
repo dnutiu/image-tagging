@@ -11,5 +11,6 @@
 
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://ImageTagger.UI/Controls/ImagePredictionRow.axaml" />
     </Application.Styles>
 </Application>

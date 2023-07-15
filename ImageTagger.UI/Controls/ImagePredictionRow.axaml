@@ -1,0 +1,23 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ImageTagger.UI.Controls">
+    <Design.PreviewWith>
+        <controls:ImagePredictionRow />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ImagePredictionRow">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal" Margin="0, 5">
+                    <Image Height="224" Width="224" Source="{TemplateBinding Image}" />
+                    <StackPanel Orientation="Vertical" Margin="10, 10">
+                        <TextBlock Text="Predicted Tags" />
+                        <TextBox TextWrapping="Wrap" MaxWidth="380" MinWidth="380" IsReadOnly="True"
+                                 Text="{TemplateBinding PredictedImageTags}" />
+                    </StackPanel>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
