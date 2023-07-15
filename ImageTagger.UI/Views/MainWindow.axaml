@@ -19,15 +19,55 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel />
     </Design.DataContext>
-
-    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled"
-                  HorizontalAlignment="Left" Margin="12,0,0,0">
-        <StackPanel Name="StackPanel">
-            <controls:ImagePredictionRow 
-                Image="{Binding Image}" 
-                PredictedImageTags="{Binding ImageTags}" />
-        </StackPanel>
-    </ScrollViewer>
+    
+    <StackPanel Orientation="Vertical">
+        <ScrollViewer
+            MaxHeight="580"
+            HorizontalAlignment="Left"
+            Margin="12,0,0,0">
+            <StackPanel>
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+                <controls:ImagePredictionRow
+                    Image="{Binding Image}"
+                    PredictedImageTags="{Binding ImageTags}" />
+            </StackPanel>
+        </ScrollViewer>
+        <Separator/>
+        <Button
+            Content="Load Images"
+            Command="{Binding OnLoadImagesClick}"
+            HorizontalAlignment="Center"
+            Margin="12" />
+    </StackPanel>
 
 
 </Window>

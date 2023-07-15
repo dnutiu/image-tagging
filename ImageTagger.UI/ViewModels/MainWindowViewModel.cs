@@ -1,4 +1,5 @@
-﻿using Avalonia.Media.Imaging;
+﻿using System;
+using Avalonia.Media.Imaging;
 
 namespace ImageTagger.UI.ViewModels;
 
@@ -8,4 +9,9 @@ public class MainWindowViewModel : ViewModelBase
         "Image tag1, Image tag2, Image tag3, Image tag4, Image tag5, Image tag6, Image tag7, Image tag8, Image tag9, Image tag10";
 
     public Bitmap Image => new("/Users/dnutiu/Pictures/picture.webp");
+    
+    public void OnLoadImagesClick()
+    {
+        Console.WriteLine("On click");
+    }
 }
