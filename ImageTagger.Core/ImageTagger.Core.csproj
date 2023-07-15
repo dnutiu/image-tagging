@@ -8,8 +8,15 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.15.1"/>
-        <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.15.1"/>
         <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1"/>
+    </ItemGroup>
+
+    <!--    Copy AIModels to output-->
+    <ItemGroup>
+        <ContentWithTargetPath Include="AIModels\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>AIModels\%(Filename)%(Extension)</TargetPath>
+        </ContentWithTargetPath>
     </ItemGroup>
 
 </Project>

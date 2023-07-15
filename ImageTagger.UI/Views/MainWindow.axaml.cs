@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using ImageTagger.UI.Controls;
+using ImageTagger.UI.Service;
 using ImageTagger.UI.ViewModels;
 
 namespace ImageTagger.UI.Views;
@@ -12,12 +13,14 @@ namespace ImageTagger.UI.Views;
 public partial class MainWindow : Window
 {
     private readonly StackPanel? _imagePredictionStackPanel;
+    private readonly ModelInference _modelInference;
 
     public MainWindow()
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel(this);
         _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel");
+        _modelInference = new ModelInference();
     }
 
     public async Task OnLoadImages_Click()
@@ -42,16 +45,17 @@ public partial class MainWindow : Window
         {
             // Access the selected file(s)
             foreach (var file in result.Where(file =>
-                         file.EndsWith(".png") || 
-                         file.EndsWith(".jpg") || 
+                         file.EndsWith(".png") ||
+                         file.EndsWith(".jpg") ||
                          file.EndsWith(".jpeg") ||
                          file.EndsWith(".webp")
-                         ))
+                     ))
             {
                 Dispatcher.UIThread.Post(() =>
                 {
                     // Add image to stack panel
-                    _imagePredictionStackPanel?.Children.Add(new ImagePredictionRow(file, new Bitmap(file)));
+                    var imageTags = _modelInference.PredictTags(file, ",");
+                    _imagePredictionStackPanel?.Children.Add(new ImagePredictionRow(imageTags, new Bitmap(file)));
                 });
             }
         }
