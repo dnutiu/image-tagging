@@ -13,6 +13,16 @@ public class ImagePredictionRow : TemplatedControl
     public static readonly AvaloniaProperty<Bitmap> ImageProperty =
         AvaloniaProperty.Register<ImagePredictionRow, Bitmap>(nameof(ImageProperty));
 
+    public ImagePredictionRow()
+    {
+    }
+
+    public ImagePredictionRow(string predictedImageTags, Bitmap image)
+    {
+        PredictedImageTags = predictedImageTags;
+        Image = image;
+    }
+
     [Content]
     public string? PredictedImageTags
     {
