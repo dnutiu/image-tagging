@@ -1,5 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
+
 
 namespace ImageTagger.UI.ViewModels;
 
@@ -10,8 +15,34 @@ public class MainWindowViewModel : ViewModelBase
 
     public Bitmap Image => new("/Users/dnutiu/Pictures/picture.webp");
     
-    public void OnLoadImagesClick()
+    public async Task OnLoadImagesClick(Window parentWindow)
     {
-        Console.WriteLine("On click");
+        // Create an instance of OpenFileDialog
+        var openFileDialog = new OpenFileDialog();
+
+        // Set the dialog's properties as needed
+        openFileDialog.Title = "Open File";
+        openFileDialog.Filters = new List<FileDialogFilter>
+        {
+            new() { Name = "Image Files", Extensions = { "png", "jpg", "jpeg" } }
+        };
+
+        // Open the dialog and wait for the result
+        var result = await openFileDialog.ShowAsync(parentWindow);
+
+        // Process the selected file(s) if the dialog was not cancelled
+        if (result != null && result.Length > 0)
+        {
+            // Access the selected file(s)
+            foreach (var file in result)
+            {
+                // Do something with the file path
+                // e.g., display the selected file path in a text box
+                Dispatcher.UIThread.Post(() =>
+                {
+                    // Assuming you have a TextBox named "filePathTextBox"
+                });
+            }
+        }
     }
 }

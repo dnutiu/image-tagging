@@ -65,6 +65,7 @@
         <Button
             Content="Load Images"
             Command="{Binding OnLoadImagesClick}"
+            CommandParameter="{Binding $parent[Window]}"
             HorizontalAlignment="Center"
             Margin="12" />
     </StackPanel>
