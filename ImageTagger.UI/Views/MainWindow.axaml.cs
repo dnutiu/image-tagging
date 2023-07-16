@@ -16,9 +16,9 @@ namespace ImageTagger.UI.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly StackPanel? _imagePredictionStackPanel;
+    private readonly StackPanel _imagePredictionStackPanel;
     private readonly ModelInference _modelInference;
-    private readonly ProgressBar? _progressBar;
+    private readonly ProgressBar _progressBar;
 
     /// <summary>
     ///     Constructs a new instance of MainWindow.
@@ -27,8 +27,10 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel(this);
-        _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel");
-        _progressBar = this.FindControl<ProgressBar>("ProgressBar");
+        _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel") ??
+                                     throw new InvalidOperationException("MainStackPanel could not be found");
+        _progressBar = this.FindControl<ProgressBar>("ProgressBar") ??
+                       throw new InvalidOperationException("ProgressBar could not be found!");
         _modelInference = new ModelInference();
     }
 
@@ -45,11 +47,7 @@ public partial class MainWindow : Window
         {
             // Set the dialog's properties as needed
             Title = "Open Files",
-            AllowMultiple = true,
-            Filters = new List<FileDialogFilter>
-            {
-                new() { Name = "Image Files", Extensions = { "png", "jpg", "jpeg", "webp" } }
-            }
+            AllowMultiple = true
         };
 
         // Open the dialog and wait for the result
@@ -62,13 +60,14 @@ public partial class MainWindow : Window
             var thread = new Thread(() =>
             {
                 var imagePredictions = new List<Tuple<string, string>>();
+                var imageFiles = result.Where(file =>
+                    file.ToLower().EndsWith(".png") ||
+                    file.ToLower().EndsWith(".jpg") ||
+                    file.ToLower().EndsWith(".jpeg") ||
+                    file.ToLower().EndsWith(".webp")
+                );
                 // For each selected file, filter out non-image files and predict image tags.
-                foreach (var file in result.Where(file =>
-                             file.ToLower().EndsWith(".png") ||
-                             file.ToLower().EndsWith(".jpg") ||
-                             file.ToLower().EndsWith(".jpeg") ||
-                             file.ToLower().EndsWith(".webp")
-                         ))
+                foreach (var file in imageFiles)
                 {
                     // Predict image tags
                     var imageTags = _modelInference.PredictTags(file, ",");
@@ -85,7 +84,7 @@ public partial class MainWindow : Window
                 Dispatcher.UIThread.Post(() =>
                 {
                     // Add images to stack panel
-                    _imagePredictionStackPanel?.Children.AddRange(
+                    _imagePredictionStackPanel.Children.AddRange(
                         imagePredictions.Select(item => new ImagePredictionRow(item.Item1, item.Item2))
                     );
                     _progressBar.IsVisible = false;
