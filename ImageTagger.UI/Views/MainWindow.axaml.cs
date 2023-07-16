@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
@@ -55,23 +57,33 @@ public partial class MainWindow : Window
         // Process the selected file(s) if the dialog was not cancelled
         if (result is { Length: > 0 })
         {
-            // Access the selected file(s)
-            foreach (var file in result.Where(file =>
-                         file.ToLower().EndsWith(".png") ||
-                         file.ToLower().EndsWith(".jpg") ||
-                         file.ToLower().EndsWith(".jpeg") ||
-                         file.ToLower().EndsWith(".webp")
-                     ))
+            // Start new thread
+            var thread = new Thread(() =>
             {
+                var imagePredictions = new List<Tuple<string, Bitmap>>();
+                // For each selected file, filter out non-image files and predict image tags.
+                foreach (var file in result.Where(file =>
+                             file.ToLower().EndsWith(".png") ||
+                             file.ToLower().EndsWith(".jpg") ||
+                             file.ToLower().EndsWith(".jpeg") ||
+                             file.ToLower().EndsWith(".webp")
+                         ))
+                {
+                    // Predict image tags
+                    var imageTags = _modelInference.PredictTags(file, ",");
+                    imagePredictions.Add(new Tuple<string, Bitmap>(imageTags, new Bitmap(file)));
+                }
+
+                // Update UI thread.
                 Dispatcher.UIThread.Post(() =>
                 {
-                    // Add image to stack panel
-                    var imageTags = _modelInference.PredictTags(file, ",");
-                    _imagePredictionStackPanel?.Children.Add(
-                        new ImagePredictionRow(imageTags, new Bitmap(file))
+                    // Add images to stack panel
+                    _imagePredictionStackPanel?.Children.AddRange(
+                        imagePredictions.Select(item => new ImagePredictionRow(item.Item1, item.Item2))
                     );
                 });
-            }
+            });
+            thread.Start();
         }
     }
 }
