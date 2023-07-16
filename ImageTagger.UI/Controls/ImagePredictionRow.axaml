@@ -9,14 +9,39 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Orientation="Horizontal" Margin="0, 5">
-                    <Image Height="224" Width="224" Source="{TemplateBinding Image}" />
-                    <StackPanel Orientation="Vertical" Margin="10, 10">
-                        <TextBlock Text="Predicted Tags" />
-                        <TextBox TextWrapping="Wrap" MaxWidth="380" MinWidth="380" IsReadOnly="True"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" MaxHeight="244" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MaxWidth="580" />
+                        <ColumnDefinition Width="Auto" MaxWidth="580" />
+                        <ColumnDefinition Width="Auto" MaxWidth="580" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Header Panel -->
+                    <Border Grid.Column="0" Grid.Row="0" Padding="11">
+                        <!-- Replace this TextBlock with your header content. -->
+                        <TextBlock Text="{TemplateBinding ImageFileName}" TextAlignment="Center" />
+                    </Border>
+
+                    <!-- Body Panel -->
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Image Grid.Row="0" Grid.Column="0" Source="{TemplateBinding Image}" />
+                    </Grid>
+
+                    <!-- Footer Panel -->
+                    <Border Grid.Column="0" Grid.Row="2" Padding="11">
+                        <!-- Replace this TextBlock with your footer content. -->
+                        <TextBox TextAlignment="Center"
+                                 TextWrapping="Wrap"
+                                 MaxWidth="380" MinWidth="380"
+                                 IsReadOnly="True"
                                  Text="{TemplateBinding PredictedImageTags}" />
-                    </StackPanel>
-                </StackPanel>
+                    </Border>
+                </Grid>
             </ControlTemplate>
         </Setter>
     </Style>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using ImageTagger.UI.Controls;
 using ImageTagger.UI.Service;
@@ -60,7 +59,7 @@ public partial class MainWindow : Window
             // Start new thread
             var thread = new Thread(() =>
             {
-                var imagePredictions = new List<Tuple<string, Bitmap>>();
+                var imagePredictions = new List<Tuple<string, string>>();
                 // For each selected file, filter out non-image files and predict image tags.
                 foreach (var file in result.Where(file =>
                              file.ToLower().EndsWith(".png") ||
@@ -71,9 +70,10 @@ public partial class MainWindow : Window
                 {
                     // Predict image tags
                     var imageTags = _modelInference.PredictTags(file, ",");
-                    imagePredictions.Add(new Tuple<string, Bitmap>(imageTags, new Bitmap(file)));
+                    imagePredictions.Add(new Tuple<string, string>(imageTags, file));
                 }
 
+                // TODO: Add progress
                 // Update UI thread.
                 Dispatcher.UIThread.Post(() =>
                 {

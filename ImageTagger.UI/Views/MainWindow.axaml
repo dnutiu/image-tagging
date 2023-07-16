@@ -20,18 +20,19 @@
     </Design.DataContext>
 
     <StackPanel Orientation="Vertical">
+        <Button
+            Content="Load Images"
+            Command="{Binding OnLoadImagesClick}"
+            HorizontalAlignment="Center"
+            Margin="12" />
+        <Separator />
         <ScrollViewer
             MaxHeight="580"
             HorizontalAlignment="Left"
             Margin="12,0,0,0">
             <StackPanel Name="MainStackPanel" />
         </ScrollViewer>
-        <Separator />
-        <Button
-            Content="Load Images"
-            Command="{Binding OnLoadImagesClick}"
-            HorizontalAlignment="Center"
-            Margin="12" />
+
     </StackPanel>
 
 
