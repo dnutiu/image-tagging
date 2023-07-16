@@ -17,6 +17,6 @@ public class MainWindowViewModel : ViewModelBase
 
     public async Task OnLoadImagesClick()
     {
-        _mainWindow.OnLoadImages_Click();
+        await _mainWindow.OnLoadImages_Click();
     }
 }
