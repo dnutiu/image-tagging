@@ -7,8 +7,8 @@
         x:Class="ImageTagger.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.png"
-        Height="640"
-        MinHeight="640"
+        Height="720"
+        MinHeight="720"
         Width="640"
         MinWidth="640"
         Title="Image Tagger">
@@ -33,12 +33,20 @@
             Minimum="0" Maximum="100" Value="0"
             ShowProgressText="True" />
         <Separator />
-        <ScrollViewer
-            MaxHeight="580"
-            HorizontalAlignment="Left"
-            Margin="12,0,0,0">
-            <StackPanel Name="MainStackPanel" />
-        </ScrollViewer>
+        <Border
+            BorderBrush="Black"
+            BorderThickness="2"
+            CornerRadius="3"
+            Margin="15"
+            Height="630"
+        >
+            <ScrollViewer
+                MaxHeight="600"
+                HorizontalAlignment="Left"
+                Margin="12,0,0,0">
+                <StackPanel Name="MainStackPanel" />
+            </ScrollViewer>
+        </Border>
 
     </StackPanel>
 
