@@ -13,6 +13,7 @@ Open the application and click "Load Images" then wait for the images prediction
 You can download the application from the [releases page](https://github.com/dnutiu/image-tagging/releases).
 
 ![Image Tagger](./docs/preview.png)
+![Image Tagger](./docs/preview-mac.png)
 
 ### Development
 
