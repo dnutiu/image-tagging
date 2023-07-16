@@ -57,10 +57,10 @@ public partial class MainWindow : Window
         {
             // Access the selected file(s)
             foreach (var file in result.Where(file =>
-                         file.EndsWith(".png") ||
-                         file.EndsWith(".jpg") ||
-                         file.EndsWith(".jpeg") ||
-                         file.EndsWith(".webp")
+                         file.ToLower().EndsWith(".png") ||
+                         file.ToLower().EndsWith(".jpg") ||
+                         file.ToLower().EndsWith(".jpeg") ||
+                         file.ToLower().EndsWith(".webp")
                      ))
             {
                 Dispatcher.UIThread.Post(() =>
