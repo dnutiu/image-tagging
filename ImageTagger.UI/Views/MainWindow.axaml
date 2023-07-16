@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="640"
         x:Class="ImageTagger.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/logo.png"
         Height="640"
         MinHeight="640"
         Width="640"
