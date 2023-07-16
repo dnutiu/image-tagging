@@ -1,3 +1,4 @@
+using System.IO;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media.Imaging;
@@ -41,11 +42,11 @@ public class ImagePredictionRow : TemplatedControl
         Image = new Bitmap(imagePath);
         _imageFilePath = imagePath;
         // Set the image file name to the file name of the image path.
-        ImageFileName = System.IO.Path.GetFileName(imagePath);
+        ImageFileName = Path.GetFileName(imagePath);
     }
 
     /// <summary>
-    /// The predicted image tags text.
+    ///     The predicted image tags text.
     /// </summary>
     [Content]
     public string? PredictedImageTags
@@ -55,7 +56,7 @@ public class ImagePredictionRow : TemplatedControl
     }
 
     /// <summary>
-    /// The Bitmap image.
+    ///     The Bitmap image.
     /// </summary>
     [Content]
     public Bitmap? Image
@@ -65,7 +66,7 @@ public class ImagePredictionRow : TemplatedControl
     }
 
     /// <summary>
-    /// The image file name.
+    ///     The image file name.
     /// </summary>
     [Content]
     public string? ImageFileName

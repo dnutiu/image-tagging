@@ -18,6 +18,7 @@ public partial class MainWindow : Window
 {
     private readonly StackPanel? _imagePredictionStackPanel;
     private readonly ModelInference _modelInference;
+    private readonly ProgressBar? _progressBar;
 
     /// <summary>
     ///     Constructs a new instance of MainWindow.
@@ -27,6 +28,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = new MainWindowViewModel(this);
         _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel");
+        _progressBar = this.FindControl<ProgressBar>("ProgressBar");
         _modelInference = new ModelInference();
     }
 
@@ -71,9 +73,14 @@ public partial class MainWindow : Window
                     // Predict image tags
                     var imageTags = _modelInference.PredictTags(file, ",");
                     imagePredictions.Add(new Tuple<string, string>(imageTags, file));
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        // Update progress bar
+                        _progressBar.IsVisible = true;
+                        _progressBar.Value = (double)((imagePredictions.Count - 1) * 100) / result.Length;
+                    });
                 }
 
-                // TODO: Add progress
                 // Update UI thread.
                 Dispatcher.UIThread.Post(() =>
                 {
@@ -81,6 +88,7 @@ public partial class MainWindow : Window
                     _imagePredictionStackPanel?.Children.AddRange(
                         imagePredictions.Select(item => new ImagePredictionRow(item.Item1, item.Item2))
                     );
+                    _progressBar.IsVisible = false;
                 });
             });
             thread.Start();
