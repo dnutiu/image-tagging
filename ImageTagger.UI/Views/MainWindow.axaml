@@ -31,8 +31,7 @@
             BorderThickness="2"
             CornerRadius="3"
             Margin="15"
-            Height="630"
-        >
+            Height="630">
             <ScrollViewer
                 MaxHeight="600"
                 HorizontalAlignment="Left"
@@ -48,6 +47,4 @@
             Minimum="0" Maximum="100" Value="0"
             ShowProgressText="True" />
     </StackPanel>
-
-
 </Window>
