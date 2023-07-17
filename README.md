@@ -15,6 +15,8 @@ You can download the application from the [releases page](https://github.com/dnu
 ![Image Tagger](./docs/preview.png)
 ![Image Tagger](./docs/preview-mac.png)
 
+Photo credit: [https://unsplash.com/@denispixels](https://unsplash.com/@denispixels)
+
 ### Development
 
 If you want to build the application yourself, you will need Dotnet 7.0 and to place the `AIModels` 
