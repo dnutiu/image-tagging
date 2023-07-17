@@ -6,6 +6,8 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <!-- Build project for Windows, macOS and Linux -->
+        <RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
     </PropertyGroup>
 
     <ItemGroup>
