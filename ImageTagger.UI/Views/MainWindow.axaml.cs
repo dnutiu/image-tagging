@@ -35,6 +35,44 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Predicts the tags for the given image files.
+    /// </summary>
+    /// <param name="files">The image file paths.</param>
+    public void PredictTagsForFiles(IEnumerable<string> files)
+    {
+        var imagePredictions = new List<Tuple<string, string>>();
+        var imageFiles = files.Where(file =>
+            file.ToLower().EndsWith(".png") ||
+            file.ToLower().EndsWith(".jpg") ||
+            file.ToLower().EndsWith(".jpeg") ||
+            file.ToLower().EndsWith(".webp")
+        ).ToList();
+        // For each selected file, filter out non-image files and predict image tags.
+        foreach (var file in imageFiles)
+        {
+            // Predict image tags
+            var imageTags = _modelInference.PredictTags(file, ",");
+            imagePredictions.Add(new Tuple<string, string>(imageTags, file));
+            Dispatcher.UIThread.Post(() =>
+            {
+                // Update progress bar
+                _progressBar.IsVisible = true;
+                _progressBar.Value = (double)((imagePredictions.Count - 1) * 100) / imageFiles.Count;
+            });
+        }
+
+        // Update UI thread.
+        Dispatcher.UIThread.Post(() =>
+        {
+            // Add images to stack panel
+            _imagePredictionStackPanel.Children.AddRange(
+                imagePredictions.Select(item => new ImagePredictionRow(item.Item1, item.Item2))
+            );
+            _progressBar.IsVisible = false;
+        });
+    }
+    
+    /// <summary>
     ///     OnLoadImages_Click is the event handler for the Load Images button.
     ///     It opens a file dialog and loads the selected images.
     ///     Then it calls the model inference service to predict the image tags.
@@ -57,39 +95,7 @@ public partial class MainWindow : Window
         if (result is { Length: > 0 })
         {
             // Start new thread
-            var thread = new Thread(() =>
-            {
-                var imagePredictions = new List<Tuple<string, string>>();
-                var imageFiles = result.Where(file =>
-                    file.ToLower().EndsWith(".png") ||
-                    file.ToLower().EndsWith(".jpg") ||
-                    file.ToLower().EndsWith(".jpeg") ||
-                    file.ToLower().EndsWith(".webp")
-                );
-                // For each selected file, filter out non-image files and predict image tags.
-                foreach (var file in imageFiles)
-                {
-                    // Predict image tags
-                    var imageTags = _modelInference.PredictTags(file, ",");
-                    imagePredictions.Add(new Tuple<string, string>(imageTags, file));
-                    Dispatcher.UIThread.Post(() =>
-                    {
-                        // Update progress bar
-                        _progressBar.IsVisible = true;
-                        _progressBar.Value = (double)((imagePredictions.Count - 1) * 100) / result.Length;
-                    });
-                }
-
-                // Update UI thread.
-                Dispatcher.UIThread.Post(() =>
-                {
-                    // Add images to stack panel
-                    _imagePredictionStackPanel.Children.AddRange(
-                        imagePredictions.Select(item => new ImagePredictionRow(item.Item1, item.Item2))
-                    );
-                    _progressBar.IsVisible = false;
-                });
-            });
+            var thread = new Thread(() => { PredictTagsForFiles(result); });
             thread.Start();
         }
     }
