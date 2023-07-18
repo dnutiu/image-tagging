@@ -27,6 +27,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel(this);
+        
         _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel") ??
                                      throw new InvalidOperationException("MainStackPanel could not be found");
         _progressBar = this.FindControl<ProgressBar>("ProgressBar") ??
@@ -35,7 +36,21 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Predicts the tags for the given image files.
+    ///     Constructs a new instance of MainWindow with the given image files.
+    /// </summary>
+    /// <param name="imageFiles">The image files paths.</param>
+    public MainWindow(IEnumerable<string> imageFiles) : this()
+    {
+        var imageFilesArray = imageFiles.ToArray();
+        if (imageFilesArray.Any())
+        {
+            var thread = new Thread(() => PredictTagsForFiles(imageFilesArray));
+            thread.Start();
+        }
+    }
+
+    /// <summary>
+    ///     Predicts the tags for the given image files.
     /// </summary>
     /// <param name="files">The image file paths.</param>
     public void PredictTagsForFiles(IEnumerable<string> files)
@@ -71,7 +86,7 @@ public partial class MainWindow : Window
             _progressBar.IsVisible = false;
         });
     }
-    
+
     /// <summary>
     ///     OnLoadImages_Click is the event handler for the Load Images button.
     ///     It opens a file dialog and loads the selected images.
