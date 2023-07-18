@@ -15,6 +15,9 @@ public class MainWindowViewModel : ViewModelBase
         _mainWindow = mainWindow;
     }
 
+    /// <summary>
+    /// OnLoadImagesClick is called when the Load Images button is clicked.
+    /// </summary>
     public async Task OnLoadImagesClick()
     {
         await _mainWindow.OnLoadImages_Click();
