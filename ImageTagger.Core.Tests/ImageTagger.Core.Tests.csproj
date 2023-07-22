@@ -26,4 +26,12 @@
       <ProjectReference Include="..\ImageTagger.Core\ImageTagger.Core.csproj" />
     </ItemGroup>
 
+    <!--    Copy resources to output directory-->
+    <ItemGroup>
+        <ContentWithTargetPath Include="resources\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>resources\%(Filename)%(Extension)</TargetPath>
+        </ContentWithTargetPath>
+    </ItemGroup>
+
 </Project>

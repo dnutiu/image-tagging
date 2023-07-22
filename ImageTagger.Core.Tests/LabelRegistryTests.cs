@@ -3,7 +3,7 @@ namespace ImageTagger.Core.Tests;
 public class LabelRegistryTests
 {
     [Fact]
-    public void TestLabelRegistry_FileOk()
+    public void Test_LabelRegistry_FileOk()
     {
         // Setup: Create a temporary labels file.
         var labels = new List<string>
@@ -27,7 +27,7 @@ public class LabelRegistryTests
     }
     
     [Fact]
-    public void TestLabelRegistry_FileEmpty()
+    public void Test_LabelRegistry_FileEmpty()
     {
         // Setup: Create a temporary labels file.
         var labelsFile = Path.GetTempFileName();
@@ -40,7 +40,7 @@ public class LabelRegistryTests
     }
     
     [Fact]
-    public void TestLabelRegistry_FileDoesNotExist()
+    public void Test_LabelRegistry_FileDoesNotExist()
     {
         // Setup: Create a temporary labels file.
         var labelsFile = Path.GetTempFileName();
