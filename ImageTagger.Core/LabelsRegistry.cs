@@ -6,6 +6,8 @@
 public class LabelsRegistry
 {
     private readonly List<string> _labels;
+    
+    public int Count => _labels.Count;
 
     /// <summary>
     ///     Instantiates a new instance of LabelsRegistry.
