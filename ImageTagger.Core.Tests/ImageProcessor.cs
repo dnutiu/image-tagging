@@ -2,17 +2,17 @@ using System.Reflection;
 
 namespace ImageTagger.Core.Tests;
 
-public class ImageProcessorTests
+public class ImageProcessor
 {
-    private readonly ImageProcessor _imageProcessor;
+    private readonly Core.ImageProcessor _imageProcessor;
     private readonly string _testImagePath;
 
-    public ImageProcessorTests()
+    public ImageProcessor()
     {
         var assemblyBasePath = Assembly.GetExecutingAssembly().Location;
         var assemblyPath = Path.GetDirectoryName(assemblyBasePath);
         _testImagePath = Path.Join(assemblyPath, "resources", "test-image.jpg");
-        _imageProcessor = new ImageProcessor();
+        _imageProcessor = new Core.ImageProcessor();
     }
 
     [Fact]

@@ -1,6 +1,6 @@
 namespace ImageTagger.Core.Tests;
 
-public class LabelRegistryTests
+public class LabelRegistry
 {
     [Fact]
     public void Test_LabelRegistry_FileOk()
