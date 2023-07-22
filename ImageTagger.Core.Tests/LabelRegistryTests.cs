@@ -14,10 +14,10 @@ public class LabelRegistryTests
         };
         var labelsFile = Path.GetTempFileName();
         File.WriteAllLines(labelsFile, labels);
-        
+
         // Test: Create a new LabelsRegistry instance.
         var labelsRegistry = new LabelsRegistry(labelsFile);
-        
+
         // Verify: The labels are the same.
         Assert.Equal(3, labelsRegistry.Count);
         for (var i = 0; i < labels.Count; i++)
@@ -25,7 +25,7 @@ public class LabelRegistryTests
             Assert.Equal(labels[i], labelsRegistry[i]);
         }
     }
-    
+
     [Fact]
     public void Test_LabelRegistry_FileEmpty()
     {
@@ -34,11 +34,11 @@ public class LabelRegistryTests
 
         // Test: Create a new LabelsRegistry instance.
         var labelsRegistry = new LabelsRegistry(labelsFile);
-        
+
         // Verify: The labels are the same.
         Assert.Equal(0, labelsRegistry.Count);
     }
-    
+
     [Fact]
     public void Test_LabelRegistry_FileDoesNotExist()
     {

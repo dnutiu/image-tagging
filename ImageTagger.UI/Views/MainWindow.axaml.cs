@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -27,7 +26,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel(this);
-        
+
         _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel") ??
                                      throw new InvalidOperationException("MainStackPanel could not be found");
         _progressBar = this.FindControl<ProgressBar>("ProgressBar") ??
@@ -44,10 +43,7 @@ public partial class MainWindow : Window
         var imageFilesArray = imageFiles.ToArray();
         if (imageFilesArray.Any())
         {
-            Task.Run(async () =>
-            {
-                await PredictTagsForFiles(imageFilesArray);
-            });
+            Task.Run(async () => { await PredictTagsForFiles(imageFilesArray); });
         }
     }
 
@@ -112,10 +108,7 @@ public partial class MainWindow : Window
         // Process the selected file(s) if the dialog was not cancelled
         if (result is { Length: > 0 })
         {
-            await Task.Run(async () =>
-            {
-                await PredictTagsForFiles(result);
-            });
+            await Task.Run(async () => { await PredictTagsForFiles(result); });
         }
     }
 }

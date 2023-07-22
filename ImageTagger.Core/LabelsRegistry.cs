@@ -6,8 +6,6 @@
 public class LabelsRegistry
 {
     private readonly List<string> _labels;
-    
-    public int Count => _labels.Count;
 
     /// <summary>
     ///     Instantiates a new instance of LabelsRegistry.
@@ -28,13 +26,11 @@ public class LabelsRegistry
         }
     }
 
+    public int Count => _labels.Count;
+
     /// <summary>
     ///     Returns the label at the given index.
     /// </summary>
     /// <param name="i">The zero based index</param>
-    public string this[int i]
-    {
-        get => _labels[i];
-        private set => _labels[i] = value;
-    }
+    public string this[int i] => _labels[i];
 }
