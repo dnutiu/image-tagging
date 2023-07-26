@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -44,8 +43,7 @@ public partial class MainWindow : Window
         var imageFilesArray = imageFiles.ToArray();
         if (imageFilesArray.Any())
         {
-            var thread = new Thread(() => PredictTagsForFiles(imageFilesArray));
-            thread.Start();
+            Task.Run(async () => { await PredictTagsForFiles(imageFilesArray); });
         }
     }
 
@@ -53,7 +51,7 @@ public partial class MainWindow : Window
     ///     Predicts the tags for the given image files.
     /// </summary>
     /// <param name="files">The image file paths.</param>
-    public void PredictTagsForFiles(IEnumerable<string> files)
+    public Task PredictTagsForFiles(IEnumerable<string> files)
     {
         var imagePredictions = new List<Tuple<string, string>>();
         var imageFiles = files.Where(file =>
@@ -85,6 +83,7 @@ public partial class MainWindow : Window
             );
             _progressBar.IsVisible = false;
         });
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -104,9 +103,7 @@ public partial class MainWindow : Window
         // Process the selected file(s) if the dialog was not cancelled
         if (result is { Length: > 0 })
         {
-            // Start new thread
-            var thread = new Thread(() => { PredictTagsForFiles(result); });
-            thread.Start();
+            await Task.Run(async () => { await PredictTagsForFiles(result); });
         }
     }
 }
