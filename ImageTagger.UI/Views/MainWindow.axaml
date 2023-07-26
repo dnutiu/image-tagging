@@ -21,9 +21,9 @@
 
     <StackPanel Orientation="Vertical">
         <Button
-            Content="Load Images"
+            Content="Select Images"
             Command="{Binding OnLoadImagesClick}"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             Margin="12" />
         <Separator />
         <Border
