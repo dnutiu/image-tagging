@@ -27,7 +27,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel(this);
-        
+
         _imagePredictionStackPanel = this.FindControl<StackPanel>("MainStackPanel") ??
                                      throw new InvalidOperationException("MainStackPanel could not be found");
         _progressBar = this.FindControl<ProgressBar>("ProgressBar") ??
@@ -96,15 +96,10 @@ public partial class MainWindow : Window
     public async Task OnLoadImages_Click()
     {
         // Create an instance of OpenFileDialog
-        var openFileDialog = new OpenFileDialog
-        {
-            // Set the dialog's properties as needed
-            Title = "Open Files",
-            AllowMultiple = true
-        };
+        var filesDialog = new FileDialogService();
 
         // Open the dialog and wait for the result
-        var result = await openFileDialog.ShowAsync(this);
+        var result = await filesDialog.OpenDialog(this);
 
         // Process the selected file(s) if the dialog was not cancelled
         if (result is { Length: > 0 })
