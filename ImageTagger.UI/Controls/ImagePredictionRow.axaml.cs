@@ -3,6 +3,10 @@ using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media.Imaging;
 using Avalonia.Metadata;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using Size = SixLabors.ImageSharp.Size;
 
 namespace ImageTagger.UI.Controls;
 
@@ -30,7 +34,7 @@ public class ImagePredictionRow : TemplatedControl
         AvaloniaProperty.Register<ImagePredictionRow, string>(nameof(ImageFileNameProperty));
 
     private readonly string _imageFilePath;
-
+    
     /// <summary>
     ///     Constructs a new instance of ImagePredictionRow.
     /// </summary>
@@ -39,11 +43,30 @@ public class ImagePredictionRow : TemplatedControl
     public ImagePredictionRow(string predictedImageTags, string imagePath)
     {
         PredictedImageTags = predictedImageTags;
-        Image = new Bitmap(imagePath);
         _imageFilePath = imagePath;
         // Set the image file name to the file name of the image path.
         ImageFileName = Path.GetFileName(imagePath);
+        // Load the bitmap image.
+        LoadBitmap();
     }
+
+    /// <summary>
+    ///  Loads the bitmap image from given path and pre-processes it.
+    /// </summary>
+    private void LoadBitmap()
+    {
+        // Resize the image to 224x224 and save it into a temporary file.
+        var temporaryFilePath = Path.GetTempFileName();
+        var image = SixLabors.ImageSharp.Image.Load<Rgb24>(_imageFilePath);
+        image.Mutate(x => x.Resize(new ResizeOptions
+        {
+            Size = new Size(224, 224),
+            Mode = ResizeMode.Pad
+        }));
+        image.SaveAsBmp(temporaryFilePath);
+        Image = new Bitmap(temporaryFilePath);
+    }
+
 
     /// <summary>
     ///     The predicted image tags text.

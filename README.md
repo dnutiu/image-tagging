@@ -10,6 +10,12 @@ It allows photographers to automate the image tagging process. 📸
 
 Open the application and click "Load Images" then wait for the images prediction to finish. You will get the keywords in the text field, and you can copy them to the clipboard.
 
+Alternatively, you can run the application from the command line and pass the path to the image as an argument.
+
+```bash
+ImageTagger.UI "\Users\dnutiu\Pictures\image.jpg"
+```
+
 You can download the application from the [releases page](https://github.com/dnutiu/image-tagging/releases).
 
 ![Image Tagger](./docs/preview.png)
