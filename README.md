@@ -19,7 +19,6 @@ ImageTagger.UI "\Users\dnutiu\Pictures\image.jpg"
 You can download the application from the [releases page](https://github.com/dnutiu/image-tagging/releases).
 
 ![Image Tagger](./docs/preview.png)
-![Image Tagger](./docs/preview-mac.png)
 
 Photo credit: [https://unsplash.com/@denispixels](https://unsplash.com/@denispixels)
 
