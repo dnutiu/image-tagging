@@ -34,7 +34,7 @@ public class ImagePredictionRow : TemplatedControl
         AvaloniaProperty.Register<ImagePredictionRow, string>(nameof(ImageFileNameProperty));
 
     private readonly string _imageFilePath;
-    
+
     /// <summary>
     ///     Constructs a new instance of ImagePredictionRow.
     /// </summary>
@@ -48,23 +48,6 @@ public class ImagePredictionRow : TemplatedControl
         ImageFileName = Path.GetFileName(imagePath);
         // Load the bitmap image.
         LoadBitmap();
-    }
-
-    /// <summary>
-    ///  Loads the bitmap image from given path and pre-processes it.
-    /// </summary>
-    private void LoadBitmap()
-    {
-        // Resize the image to 224x224 and save it into a temporary file.
-        var temporaryFilePath = Path.GetTempFileName();
-        var image = SixLabors.ImageSharp.Image.Load<Rgb24>(_imageFilePath);
-        image.Mutate(x => x.Resize(new ResizeOptions
-        {
-            Size = new Size(224, 224),
-            Mode = ResizeMode.Pad
-        }));
-        image.SaveAsBmp(temporaryFilePath);
-        Image = new Bitmap(temporaryFilePath);
     }
 
 
@@ -96,5 +79,22 @@ public class ImagePredictionRow : TemplatedControl
     {
         get => GetValue(ImageFileNameProperty) as string;
         set => SetValue(ImageFileNameProperty, value);
+    }
+
+    /// <summary>
+    ///     Loads the bitmap image from given path and pre-processes it.
+    /// </summary>
+    private void LoadBitmap()
+    {
+        // Resize the image to 224x224 and save it into a temporary file.
+        var temporaryFilePath = Path.GetTempFileName();
+        var image = SixLabors.ImageSharp.Image.Load<Rgb24>(_imageFilePath);
+        image.Mutate(x => x.Resize(new ResizeOptions
+        {
+            Size = new Size(224, 224),
+            Mode = ResizeMode.Pad
+        }));
+        image.SaveAsBmp(temporaryFilePath);
+        Image = new Bitmap(temporaryFilePath);
     }
 }
