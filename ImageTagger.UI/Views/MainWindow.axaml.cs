@@ -79,6 +79,7 @@ public partial class MainWindow : Window
             file.ToLower().EndsWith(".jpeg") ||
             file.ToLower().EndsWith(".webp")
         ).ToList();
+
         // For each selected file, filter out non-image files and predict image tags.
         foreach (var file in imageFiles)
         {
