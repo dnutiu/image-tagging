@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -41,7 +42,13 @@ public partial class MainWindow : Window
     public MainWindow(IEnumerable<string> imageFiles) : this()
     {
         var imageFilesArray = imageFiles.ToArray();
-        if (imageFilesArray.Any())
+        var file = imageFilesArray[0];
+        if (imageFilesArray.Length == 1 && Directory.Exists(file))
+        {
+            var filesInDirectory = Directory.GetFiles(imageFilesArray[0]);
+            Task.Run(async () => { await PredictTagsForFiles(filesInDirectory); });
+        }
+        else
         {
             Task.Run(async () => { await PredictTagsForFiles(imageFilesArray); });
         }
@@ -51,10 +58,22 @@ public partial class MainWindow : Window
     ///     Predicts the tags for the given image files.
     /// </summary>
     /// <param name="files">The image file paths.</param>
-    public Task PredictTagsForFiles(IEnumerable<string> files)
+    /// <throws><see cref="ArgumentNullException"/> if <paramref name="files"/> is null.</throws>
+    private Task PredictTagsForFiles(IEnumerable<string> files)
     {
+        if (files == null)
+        {
+            throw new ArgumentNullException(nameof(files));
+        }
+
+        var enumerable = files as string[] ?? files.ToArray();
+        if (!enumerable.Any())
+        {
+            return Task.CompletedTask;
+        }
+        
         var imagePredictions = new List<Tuple<string, string>>();
-        var imageFiles = files.Where(file =>
+        var imageFiles = enumerable.Where(file =>
             file.ToLower().EndsWith(".png") ||
             file.ToLower().EndsWith(".jpg") ||
             file.ToLower().EndsWith(".jpeg") ||
@@ -90,7 +109,7 @@ public partial class MainWindow : Window
     ///     OnLoadImages_Click is the event handler for the Load Images button.
     ///     It opens a file dialog and loads the selected images.
     ///     Then it calls the model inference service to predict the image tags.
-    ///     Finally it adds the image and the predicted tags to the UI's stack panel.
+    ///     Finally it adds the image and the predicted tags to the UI stack panel.
     /// </summary>
     public async Task OnLoadImages_Click()
     {
