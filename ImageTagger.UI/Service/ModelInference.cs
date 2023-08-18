@@ -10,8 +10,8 @@ namespace ImageTagger.UI.Service;
 /// </summary>
 public class ModelInference
 {
-    private const string TaggingModelCategoriesPath = "AIModels/resnet50_categories.txt";
-    private const string TaggingModelPath = "AIModels/resnet50.onnx";
+    private const string TaggingModelCategoriesPath = "AIModels/prediction_categories.txt";
+    private const string TaggingModelPath = "AIModels/prediction.onnx";
     private readonly ModelPrediction _modelPrediction;
 
     /// <summary>
