@@ -22,9 +22,27 @@ You can download the application from the [releases page](https://github.com/dnu
 
 Photo credit: [https://unsplash.com/@denispixels](https://unsplash.com/@denispixels)
 
-### Development
+## Development
 
 If you want to build the application yourself, you will need Dotnet 7.0 and to place the `AIModels` 
 folder from the release archive in the folder `\ImageTagger\ImageTagger.Core\AIModels`.
 
-You can visit my blog at [https://blog.nuculabs.dev](https://blog.nuculabs.dev).
+### Building from source
+
+To build from source you will need .NET Core 7.0 and optionally make.
+
+Then change directory to the root folder and run:
+
+**Important**: Ensure that you've downloaded a released build and grab the `AIModels` folder from the archive
+and place it in the `\ImageTagger\ImageTagger.Core\AIModels` folder.
+
+```bash
+
+```bash
+make publish-all
+```
+The application will be published in the `publish` folder: `ImageTagger.UI\bin\Release\net7.0\publish`.
+
+# Blog
+
+You can visit my tech blog at [https://blog.nuculabs.dev](https://blog.nuculabs.dev).
