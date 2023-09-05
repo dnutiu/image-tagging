@@ -20,7 +20,7 @@ You can download the application from the [releases page](https://github.com/dnu
 
 ![Image Tagger](./docs/preview.png)
 
-Photo credit: [https://unsplash.com/@denispixels](https://unsplash.com/@denispixels)
+Photo credit: [https://unsplash.com/@ndcphoto](https://unsplash.com/@ndcphoto)
 
 ## Development
 
