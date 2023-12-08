@@ -27,7 +27,7 @@ Photo credit: [https://unsplash.com/@ndcphoto](https://unsplash.com/@ndcphoto)
 If you want to build the application yourself, you will need Dotnet 7.0 and to place the `AIModels` 
 folder from the release archive in the folder `\ImageTagger\ImageTagger.Core\AIModels`.
 
-The release archive is found here: https://github.com/dnutiu/image-tagging/releases
+The release archive is in the [releases page](https://github.com/dnutiu/image-tagging/releases).
 
 ### Building from source
 
